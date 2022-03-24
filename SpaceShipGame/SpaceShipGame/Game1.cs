@@ -51,6 +51,8 @@ namespace SpaceShipGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            player.ShipUpdate();
+
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -62,7 +64,7 @@ namespace SpaceShipGame
 
             _spriteBatch.Begin();
             _spriteBatch.Draw(spaceSprite, new Vector2(0, 0), Color.White);
-            _spriteBatch.Draw(shipSprite, player.position, Color.White);
+            _spriteBatch.Draw(shipSprite, new Vector2(player.position.X - 34 , player.position.Y- 50), Color.White);
             _spriteBatch.End();
 
 

@@ -10,5 +10,10 @@ namespace SpaceShipGame
     class Ship
     {
         public Vector2 position = new Vector2(100, 100);
+
+        public void ShipUpdate()
+        {
+            position.Y++;
+        }
     }
 }
