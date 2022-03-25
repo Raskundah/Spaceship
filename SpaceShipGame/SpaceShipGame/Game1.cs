@@ -2,10 +2,13 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+
 namespace SpaceShipGame
 {
     public class Game1 : Game
     {
+        // declare variables
+
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
@@ -15,7 +18,10 @@ namespace SpaceShipGame
         SpriteFont gameFont;
         SpriteFont timerFont;
 
+        // call custom classes and create objects
+
         Ship player = new Ship();
+        Controller gameController = new Controller();
 
         public Game1()
         {
@@ -25,6 +31,9 @@ namespace SpaceShipGame
         }
 
         protected override void Initialize()
+
+            // Setup game window size.
+            // TODO have player input their resolution selection
         {
             _graphics.PreferredBackBufferWidth = 1920;
             _graphics.PreferredBackBufferHeight = 1080;
@@ -35,6 +44,8 @@ namespace SpaceShipGame
         }
 
         protected override void LoadContent()
+
+            // load textures into texture2D variabe
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -52,6 +63,12 @@ namespace SpaceShipGame
                 Exit();
 
             player.ShipUpdate(gameTime);
+            gameController.conTime(gameTime);
+
+            for (int i = 0; i < gameController.asteroids.Count; i++)
+            {
+                gameController.asteroids[i].asteroidUpdate(gameTime);
+            }
 
             // TODO: Add your update logic here
 
@@ -59,13 +76,19 @@ namespace SpaceShipGame
         }
 
         protected override void Draw(GameTime gameTime)
+
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin();
             _spriteBatch.Draw(spaceSprite, new Vector2(0, 0), Color.White);
             _spriteBatch.Draw(shipSprite, new Vector2(player.position.X - 34 , player.position.Y- 50), Color.White);
-            _spriteBatch.End();
+
+            for (int i = 0; i < gameController.asteroids.Count; i++)
+            {
+                _spriteBatch.Draw(asteroidSrite, new Vector2(gameController.asteroids[i].position.X - gameController.asteroids[i].radius, gameController.asteroids[i].position.Y - gameController.asteroids[i].radius), Color.White);
+            }
+                _spriteBatch.End();
 
 
             base.Draw(gameTime);
