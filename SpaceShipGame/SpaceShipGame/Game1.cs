@@ -51,7 +51,7 @@ namespace SpaceShipGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            player.ShipUpdate();
+            player.ShipUpdate(gameTime);
 
             // TODO: Add your update logic here
 

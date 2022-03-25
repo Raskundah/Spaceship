@@ -10,29 +10,30 @@ namespace SpaceShipGame
     class Ship
     {
         public Vector2 position = new Vector2(100, 100);
-
-        public void ShipUpdate()
+        public int speed = 180;
+        public void ShipUpdate(GameTime gameTime)
         {
             KeyboardState kState = Keyboard.GetState();
+            float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (kState.IsKeyDown(Keys.A) || kState.IsKeyDown(Keys.Left))
             {
-                position.X--;
+                position.X -= speed * dt;
             }
 
             if (kState.IsKeyDown(Keys.D) || kState.IsKeyDown(Keys.Right))
             {
-                position.X++;
+                position.X += speed * dt;
             }
 
             if (kState.IsKeyDown(Keys.S) || kState.IsKeyDown(Keys.Down))
             {
-                position.Y++;
+                position.Y += speed * dt;
             }
 
             if (kState.IsKeyDown(Keys.W) || kState.IsKeyDown(Keys.Up))
             {
-                position.Y--;
+                position.Y -= speed * dt;
             }
         }
     }
