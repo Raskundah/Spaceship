@@ -13,10 +13,30 @@ namespace SpaceShipGame
         public double timer = 2;
         public double maxTime = 2;
         public int speed = 250;
+        public bool inGame = false;
+        public double totalTime = 0;
 
         public void conTime(GameTime gameTime)
         {
-            timer -= gameTime.ElapsedGameTime.TotalSeconds;
+            if (inGame)
+            {
+                timer -= gameTime.ElapsedGameTime.TotalSeconds;
+                totalTime += gameTime.ElapsedGameTime.TotalSeconds;
+
+            }
+
+            else
+            {
+                KeyboardState kState = Keyboard.GetState();
+                if(kState.IsKeyDown(Keys.Enter))
+                {
+                    inGame =true;
+                    totalTime = 0;
+                    timer = 2;
+                    maxTime = 2;
+                    speed = 250;
+                }
+            }
             if (timer <= 0)
             {
                 asteroids.Add(new Asteroid(speed));

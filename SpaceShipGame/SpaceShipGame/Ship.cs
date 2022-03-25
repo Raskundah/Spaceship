@@ -6,15 +6,18 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace SpaceShipGame
+
 {
     class Ship
     {
         #region Variables
 
+        
         public Vector2 position = new Vector2(100, 100); // sets base ship position.
         public int regularSpeed = 180; // sets ship base speed.
         public int boostSpeed = 360; // speed increase from boost.
         public float thrustCapacity = 100.0f;
+        public int radius = 30;
         public void ShipUpdate(GameTime gameTime)
 
         #endregion
@@ -29,7 +32,7 @@ namespace SpaceShipGame
 
             // movement handling, regular and boost speed.
 
-            if (kState.IsKeyDown(Keys.A) || kState.IsKeyDown(Keys.Left))
+            if (kState.IsKeyDown(Keys.A) || kState.IsKeyDown(Keys.Left) && position.X > 0)
 
             // Left/Negative X axis movement.
 
@@ -53,7 +56,7 @@ namespace SpaceShipGame
                 }
             }
 
-            if (kState.IsKeyDown(Keys.D) || kState.IsKeyDown(Keys.Right)) 
+            if (kState.IsKeyDown(Keys.D) || kState.IsKeyDown(Keys.Right) && position.X < 1920) 
 
                 // Right/Positive X axis movement.
 
@@ -75,7 +78,7 @@ namespace SpaceShipGame
                 }
             }
 
-            if (kState.IsKeyDown(Keys.S) || kState.IsKeyDown(Keys.Down))
+            if (kState.IsKeyDown(Keys.S) || kState.IsKeyDown(Keys.Down) && position.Y < 1080)
 
             // Up/Negative Y axis movement.
             {
@@ -96,7 +99,7 @@ namespace SpaceShipGame
                 }
             }
 
-            if (kState.IsKeyDown(Keys.W) || kState.IsKeyDown(Keys.Up))
+            if (kState.IsKeyDown(Keys.W) || kState.IsKeyDown(Keys.Up) && position.Y > 0)
 
                 // Down/Positive Y axis movement.
             {
